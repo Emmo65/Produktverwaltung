@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_SESSION["message"] = "Produkt gelöscht";
 $apiUrl = "http://localhost/Produktverwaltung/Backend/api.php";
 
 if (isset($_POST["loeschen"])) {
@@ -98,6 +100,10 @@ $suche = $_GET["suche"] ?? "";
         <span>Dark Mode</span>
         </div>
         <h1>Produktübersicht</h1>
+        <?php if (isset($_SESSION["message"])) { ?>
+            <p class="message"><?php echo $_SESSION["message"]; ?></p>
+         <?php unset($_SESSION["message"]); ?>
+        <?php } ?>
         <form method="GET" class="search-form">
             <input type="text" name="suche" placeholder="Produkt suchen">
             <button type="submit">Suchen</button>
@@ -142,7 +148,7 @@ $suche = $_GET["suche"] ?? "";
                     </span>
                 </td>    
                         <td>
-                            <form method="POST" style="display:inline;">
+                            <form method="POST" style="display:inline;" onsubmit="return confirm('Wirklich löschen?')">
                                 <input type="hidden" name="id" value="<?php echo $produkt["id"]; ?>">
                                 <button type="submit" name="loeschen">Löschen</button>
                             </form>
@@ -174,9 +180,11 @@ $suche = $_GET["suche"] ?? "";
                 value="<?php echo $editProdukt["lagerbestand"] ?? ""; ?>" required>
             <br><br>
 
-            <button type="submit" name="<?php echo $editProdukt ? "update" : "speichern"; ?>">
+            <button type="submit" name="loeschen" onclick="return confirm('Wirklich löschen?')">
+                Löschen
+                </button>
                 <?php echo $editProdukt ? "Aktualisieren" : "Produkt speichern"; ?>
-            
+                
 
             </button>
         </form>

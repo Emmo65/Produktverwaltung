@@ -189,3 +189,11 @@ body.dark button {
     border-radius: 5px;
     font-weight: bold;
 }
+
+.message {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}

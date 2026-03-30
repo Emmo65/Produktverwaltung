@@ -76,6 +76,8 @@ if (isset($_GET["edit"])) {
 
 $daten = file_get_contents($apiUrl);
 $produkte = json_decode($daten, true);
+
+$suche = $_GET["suche"] ?? "";
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +98,10 @@ $produkte = json_decode($daten, true);
         <span>Dark Mode</span>
         </div>
         <h1>Produktübersicht</h1>
-
+        <form method="GET" class="search-form">
+            <input type="text" name="suche" placeholder="Produkt suchen">
+            <button type="submit">Suchen</button>
+        </form>
         <table border="1">
             <tr>
                 <th>Name</th>
@@ -107,6 +112,13 @@ $produkte = json_decode($daten, true);
             </tr>
 
             <?php foreach ($produkte as $produkt) { ?>
+
+                <?php
+                    if ($suche != "" && stripos($produkt["name"], $suche) === false) {
+                    continue;
+                    }
+                ?>
+
                 <tr>
                     <td><?php echo $produkt["name"]; ?></td>
                     <td><?php echo $produkt["preis"]; ?></td>

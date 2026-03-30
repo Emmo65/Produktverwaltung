@@ -55,19 +55,16 @@ if ($method == "PUT") {
     echo json_encode(["message" => "Produkt wurde aktualisiert"]);
 }
 if ($method == "DELETE") {
-     $datei = file_get_contents("php://input");
-    $json = json_decode($datei, true);
+    if (!isset($_GET["id"])) {
+        echo json_encode(["message" => "Produkt nicht gefunden."]);
+    } else {
+        $id = $_GET["id"];
 
-    $id = $json["id"];
-    if (!isset($id)) {
-         echo json_encode(["message" => "Produkt nicht gefunden."]);
-    }
-    else{
-      
-        $sql = "DELETE FROM produkte WHERE id=?";
+        $sql = "DELETE FROM produkte WHERE id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
-        echo json_encode(["message"=>"Produkt wurde erfolgreich gelöscht."]);
+
+        echo json_encode(["message" => "Produkt wurde erfolgreich gelöscht."]);
     }
 }
 ?>

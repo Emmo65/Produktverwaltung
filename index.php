@@ -123,15 +123,32 @@ $suche = $_GET["suche"] ?? "";
                     <td><?php echo $produkt["name"]; ?></td>
                     <td><?php echo $produkt["preis"]; ?></td>
                     <td><?php echo $produkt["beschreibung"]; ?></td>
-                    <td><?php echo $produkt["lagerbestand"]; ?></td>    
                     <td>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="id" value="<?php echo $produkt["id"]; ?>">
-                            <button type="submit" name="loeschen">Löschen</button>
-                        </form>
+                        <?php
+                        $bestand = $produkt["lagerbestand"];
+                        $klasse = "";
 
-                        <a href="?edit=<?php echo $produkt["id"]; ?>" class="edit-btn">Bearbeiten</a>
-                    </td>
+                        if ($bestand == 0) {
+                            $klasse = "stock-empty";
+                        } elseif ($bestand <= 5) {
+                            $klasse = "stock-low";
+                        } else {
+                            $klasse = "stock-good";
+                        }
+                    ?>
+
+                    <span class="<?php echo $klasse; ?>">
+                        <?php echo $bestand; ?>
+                    </span>
+                </td>    
+                        <td>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="id" value="<?php echo $produkt["id"]; ?>">
+                                <button type="submit" name="loeschen">Löschen</button>
+                            </form>
+
+                            <a href="?edit=<?php echo $produkt["id"]; ?>" class="edit-btn">Bearbeiten</a>
+                        </td>
                 </tr>
             <?php } ?>
         </table>

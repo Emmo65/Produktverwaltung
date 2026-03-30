@@ -86,6 +86,13 @@ $produkte = json_decode($daten, true);
 </head>
 <body>
     <div class="container">
+        <div class="topbar">
+            <label class="switch">
+        <input type="checkbox" id="darkmode-toggle">
+            <span class="slider"></span>
+        </label>
+        <span>Dark Mode</span>
+        </div>
         <h1>Produktübersicht</h1>
 
         <table border="1">
@@ -135,5 +142,12 @@ $produkte = json_decode($daten, true);
             </button>
         </form>
     </div>
+    <script>
+        const toggle = document.getElementById("darkmode-toggle");
+
+        toggle.addEventListener("change", function () {
+        document.body.classList.toggle("dark");
+         });
+</script>
 </body>
 </html>

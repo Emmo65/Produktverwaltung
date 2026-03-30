@@ -20,7 +20,8 @@ if (isset($_POST["speichern"])) {
     $produkt = [
         "name" => $_POST["name"],
         "preis" => $_POST["preis"],
-        "beschreibung" => $_POST["beschreibung"]
+        "beschreibung" => $_POST["beschreibung"],
+        "lagerbestand" => $_POST["lagerbestand"]
     ];
 
     $jsonDaten = json_encode($produkt);
@@ -44,7 +45,8 @@ if (isset($_POST["update"])) {
         "id" => $_POST["id"],
         "name" => $_POST["name"],
         "preis" => $_POST["preis"],
-        "beschreibung" => $_POST["beschreibung"]
+        "beschreibung" => $_POST["beschreibung"],
+        "lagerbestand" => $_POST["lagerbestand"]
     ];
 
     $jsonDaten = json_encode($produkt);
@@ -100,6 +102,7 @@ $produkte = json_decode($daten, true);
                 <th>Name</th>
                 <th>Preis</th>
                 <th>Beschreibung</th>
+                <th>Bestand</th>
                 <th>Aktion</th>
             </tr>
 
@@ -108,6 +111,7 @@ $produkte = json_decode($daten, true);
                     <td><?php echo $produkt["name"]; ?></td>
                     <td><?php echo $produkt["preis"]; ?></td>
                     <td><?php echo $produkt["beschreibung"]; ?></td>
+                    <td><?php echo $produkt["lagerbestand"]; ?></td>    
                     <td>
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="id" value="<?php echo $produkt["id"]; ?>">
@@ -137,8 +141,14 @@ $produkte = json_decode($daten, true);
                 value="<?php echo $editProdukt["beschreibung"] ?? ""; ?>" required>
             <br><br>
 
+            <input type="number" name="lagerbestand" placeholder="Lagerbestand"
+                value="<?php echo $editProdukt["lagerbestand"] ?? ""; ?>" required>
+            <br><br>
+
             <button type="submit" name="<?php echo $editProdukt ? "update" : "speichern"; ?>">
                 <?php echo $editProdukt ? "Aktualisieren" : "Produkt speichern"; ?>
+            
+
             </button>
         </form>
     </div>

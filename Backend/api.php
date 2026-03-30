@@ -32,10 +32,11 @@ if ($method == "POST") {
     $name = $json["name"];
     $preis = $json["preis"];
     $beschreibung = $json["beschreibung"];
+    $lagerbestand = $json["lagerbestand"];
 
-    $sql = "INSERT INTO produkte (name, preis, beschreibung) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO produkte (name, preis, beschreibung, lagerbestand) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$name, $preis, $beschreibung]);
+    $stmt->execute([$name, $preis, $beschreibung, $lagerbestand]);
 
     echo json_encode(["message" => "Produkt wurde erstellt"]);
 }
@@ -47,10 +48,11 @@ if ($method == "PUT") {
     $name = $json["name"];
     $preis = $json["preis"];
     $beschreibung = $json["beschreibung"];
+    $lagerbestand = $json["lagerbestand"];
 
-    $sql = "UPDATE produkte SET name = ?, preis = ?, beschreibung = ? WHERE id = ?";
+    $sql = "UPDATE produkte SET name = ?, preis = ?, beschreibung = ?, lagerbestand = ? WHERE id = ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$name, $preis, $beschreibung, $id]);
+    $stmt->execute([$name, $preis, $beschreibung, $lagerbestand, $id]);
 
     echo json_encode(["message" => "Produkt wurde aktualisiert"]);
 }

@@ -5,6 +5,9 @@ Es besteht aus einem PHP-Backend (REST API), einer MySQL-Datenbank und einem Fro
 
 ---
 
+## 📸 Vorschau
+![Screenshot](assets/screenshot.png)
+
 ## 🚀 Funktionen
 
 ### 🔧 Backend (REST API)
